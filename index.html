@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bon Bouquet | Digital Menu</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+    --cream:#f7f4ee;
+    --dark:#20231f;
+    --green:#526653;
+    --green-dark:#3e4e40;
+    --gold:#b79b62;
+    --white:#fff;
+    --gray:#777;
+    --border:#e6e1d8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--cream);
+    color:var(--dark);
+    font-family:Inter,sans-serif;
+}
+
+/* HERO */
+
+.hero{
+    min-height:390px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+
+    background:
+        linear-gradient(rgba(25,30,25,.28),rgba(25,30,25,.28)),
+        url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+}
+
+.hero-content{
+    color:white;
+    position:relative;
+    z-index:2;
+    padding:30px;
+}
+
+.small-title{
+    font-size:11px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.logo{
+    font-family:"Cormorant Garamond",serif;
+    font-size:72px;
+    font-weight:600;
+    line-height:.9;
+}
+
+.divider{
+    width:60px;
+    height:1px;
+    background:#d5bc82;
+    margin:25px auto;
+}
+
+.subtitle{
+    font-size:12px;
+    letter-spacing:4px;
+}
+
+/* LANGUAGE */
+
+.language{
+    position:absolute;
+    right:18px;
+    top:18px;
+    z-index:10;
+    display:flex;
+    gap:5px;
+}
+
+.language button{
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(0,0,0,.25);
+    color:white;
+    border-radius:20px;
+    padding:7px 11px;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.language button.active{
+    background:white;
+    color:#222;
+}
+
+/* NAV */
+
+.nav-wrapper{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(247,244,238,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:13px 16px;
+    scrollbar-width:none;
+    max-width:1100px;
+    margin:auto;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category-btn{
+    white-space:nowrap;
+    border:1px solid #ddd7cb;
+    background:transparent;
+    padding:9px 16px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:11px;
+}
+
+.category-btn.active,
+.category-btn:hover{
+    background:var(--green);
+    color:white;
+    border-color:var(--green);
+}
+
+/* SEARCH */
+
+.search-area{
+    max-width:850px;
+    margin:25px auto 10px;
+    padding:0 20px;
+}
+
+.search{
+    width:100%;
+    border:1px solid #ddd8ce;
+    background:white;
+    border-radius:40px;
+    padding:15px 20px;
+    outline:none;
+    font-size:13px;
+}
+
+.search:focus{
+    border-color:var(--green);
+}
+
+/* MENU */
+
+.menu{
+    max-width:1050px;
+    margin:20px auto 100px;
+    padding:0 20px;
+}
+
+.section-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:38px;
+    text-align:center;
+    margin:50px 0 22px;
+}
+
+.section-title span{
+    display:block;
+    font-family:Inter,sans-serif;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:5px;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+/* ITEM */
+
+.item{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,0,0,.07);
+}
+
+.item-image{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    display:block;
+}
+
+.item-content{
+    padding:18px;
+}
+
+.item-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.item-name{
+    font-family:"Cormorant Garamond",serif;
+    font-size:25px;
+}
+
+.price{
+    color:var(--green);
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.description{
+    color:var(--gray);
+    font-size:12px;
+    line-height:1.6;
+    margin-top:7px;
+}
+
+.tag{
+    display:inline-block;
+    margin-top:12px;
+    padding:5px 9px;
+    background:#e8eee5;
+    color:var(--green);
+    border-radius:20px;
+    font-size:8px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+/* WAITER BUTTON */
+
+.waiter{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:100;
+}
+
+.waiter button{
+    border:none;
+    background:var(--green);
+    color:white;
+    padding:14px 20px;
+    border-radius:40px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.waiter button:hover{
+    background:var(--green-dark);
+}
+
+/* ORDER */
+
+.order-box{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:200;
+}
+
+.order-box.show{
+    display:flex;
+}
+
+.order-card{
+    background:white;
+    width:100%;
+    max-width:500px;
+    border-radius:25px 25px 0 0;
+    padding:28px;
+    animation:slideUp .3s ease;
+}
+
+@keyframes slideUp{
+    from{
+        transform:translateY(100%);
+    }
+    to{
+        transform:translateY(0);
+    }
+}
+
+.order-card h2{
+    font-family:"Cormorant Garamond",serif;
+    font-size:32px;
+}
+
+.order-card p{
+    font-size:13px;
+    color:#777;
+    margin:8px 0 20px;
+}
+
+.table-input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.order-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.order-buttons button{
+    flex:1;
+    border:none;
+    padding:13px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.send{
+    background:var(--green);
+    color:white;
+}
+
+.close{
+    background:#eee;
+}
+
+/* FOOTER */
+
+footer{
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.footer-logo{
+    font-family:"Cormorant Garamond",serif;
+    font-size:40px;
+}
+
+footer p{
+    color:#aaa;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.contact{
+    margin-top:22px;
+    font-size:12px;
+    line-height:2;
+}
+
+.social{
+    margin-top:20px;
+}
+
+.social a{
+    color:white;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.xtech{
+    margin-top:30px;
+    color:#888;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .hero{
+        min-height:330px;
+    }
+
+    .logo{
+        font-size:54px;
+    }
+
+    .menu-grid{
+        grid-template-columns:1fr;
+    }
+
+    .item-image{
+        height:210px;
+    }
+
+    .section-title{
+        font-size:34px;
+    }
+
+    .waiter{
+        right:15px;
+        bottom:15px;
+    }
+
+    .waiter button{
+        padding:12px 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="language">
+        <button class="active" onclick="setLanguage('sq',this)">SQ</button>
+        <button onclick="setLanguage('en',this)">EN</button>
+    </div>
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            Café & Lounge
+        </div>
+
+        <div class="logo">
+            Bon Bouquet
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="subtitle" id="menuTitle">
+            MENU
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- CATEGORIES -->
+
+<div class="nav-wrapper">
+
+  <div class="categories">
+
+<button class="category-btn active"
+onclick="filterMenu('all',this)">
+Të gjitha
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('breakfast',this)">
+Breakfast
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('starters',this)">
+Starters
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('salads',this)">
+Salads
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('pasta',this)">
+Pasta
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('risotto',this)">
+Risotto
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('pizza',this)">
+Pizza
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('burgers',this)">
+Burgers
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('sandwiches',this)">
+Sandwiches
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('meat',this)">
+Meat & Chicken
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('fish',this)">
+Fish
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('sides',this)">
+Sides
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('dessert',this)">
+Desserts
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('coffee',this)">
+Coffee
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('tea',this)">
+Tea
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('fresh',this)">
+Fresh
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('soft',this)">
+Soft Drinks
+</button>
+
+<button class="category-btn"
+onclick="filterMenu('water',this)">
+Water
+</button>
+
+</div>
+<!-- SEARCH -->
+
+<div class="search-area">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Kërko në menu..."
+        onkeyup="searchMenu()"
+    >
+
+</div>
+
+
+<!-- MENU -->
+
+<main class="menu">
+
+
+<!-- BREAKFAST -->
+
+<section class="menu-section" data-category="breakfast">
+
+<h2 class="section-title">
+    <span>Morning</span>
+    Breakfast
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=85"
+alt="Breakfast">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Breakfast Plate</h3>
+<div class="price">€ 8.50</div>
+</div>
+
+<p class="description">
+Vezë, perime të freskëta, djathë dhe shoqërime të zgjedhura.
+</p>
+
+<span class="tag">Popular</span>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85"
+alt="Healthy Breakfast">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Healthy Bowl</h3>
+<div class="price">€ 7.50</div>
+</div>
+
+<p class="description">
+Përzgjedhje e freskët për një mëngjes të lehtë.
+</p>
+
+<span class="tag">Healthy</span>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<!-- MAIN -->
+
+<section class="menu-section" data-category="main">
+
+<h2 class="section-title">
+    <span>Kitchen</span>
+    Main Dishes
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=900&q=85"
+alt="Chicken">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Chicken Pesto</h3>
+<div class="price">€ 9.50</div>
+</div>
+
+<p class="description">
+Pulë e kombinuar me pesto dhe përbërës të freskët.
+</p>
+
+<span class="tag">Chef's Choice</span>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
+alt="Salad">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">House Salad</h3>
+<div class="price">€ 5.50</div>
+</div>
+
+<p class="description">
+Sallatë e freskët me perime sezonale.
+</p>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<!-- PASTA -->
+
+<section class="menu-section" data-category="pasta">
+
+<h2 class="section-title">
+    <span>Italian Selection</span>
+    Pasta
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85"
+alt="Pasta">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Pasta Pesto</h3>
+<div class="price">€ 8.50</div>
+</div>
+
+<p class="description">
+Pasta me pesto dhe përbërës të freskët.
+</p>
+
+<span class="tag">Popular</span>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=85"
+alt="Creamy Pasta">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Creamy Pasta</h3>
+<div class="price">€ 8.50</div>
+</div>
+
+<p class="description">
+Pasta në salcë kremoze me përbërës të zgjedhur.
+</p>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<!-- DESSERT -->
+
+<section class="menu-section" data-category="dessert">
+
+<h2 class="section-title">
+    <span>Sweet Moment</span>
+    Desserts
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=85"
+alt="Cheesecake">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Cheesecake</h3>
+<div class="price">€ 4.00</div>
+</div>
+
+<p class="description">
+Cheesecake i butë dhe kremoz.
+</p>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+alt="Chocolate Cake">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Chocolate Cake</h3>
+<div class="price">€ 4.00</div>
+</div>
+
+<p class="description">
+Ëmbëlsirë e pasur me çokollatë.
+</p>
+
+<span class="tag">Favorite</span>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<!-- COFFEE -->
+
+<section class="menu-section" data-category="coffee">
+
+<h2 class="section-title">
+    <span>Freshly Brewed</span>
+    Coffee
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85"
+alt="Coffee">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Cappuccino</h3>
+<div class="price">€ 2.50</div>
+</div>
+
+<p class="description">
+Espresso me qumësht të teksturuar dhe shkumë.
+</p>
+
+<span class="tag">Popular</span>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85"
+alt="Latte">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Latte</h3>
+<div class="price">€ 2.50</div>
+</div>
+
+<p class="description">
+Espresso dhe qumësht i teksturuar.
+</p>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<!-- DRINKS -->
+
+<section class="menu-section" data-category="drinks">
+
+<h2 class="section-title">
+    <span>Refresh</span>
+    Drinks
+</h2>
+
+<div class="menu-grid">
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=85"
+alt="Lemonade">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Fresh Lemonade</h3>
+<div class="price">€ 3.00</div>
+</div>
+
+<p class="description">
+Limonadë e freskët e përgatitur në shtëpi.
+</p>
+
+</div>
+</article>
+
+
+<article class="item">
+
+<img
+class="item-image"
+src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=900&q=85"
+alt="Orange Juice">
+
+<div class="item-content">
+
+<div class="item-top">
+<h3 class="item-name">Fresh Orange Juice</h3>
+<div class="price">€ 3.50</div>
+</div>
+
+<p class="description">
+Lëng portokalli i freskët.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- WAITER -->
+
+<div class="waiter">
+
+<button onclick="openWaiter()">
+    🔔 <span id="waiterText">Thirr kamarierin</span>
+</button>
+
+</div>
+
+
+<!-- WAITER MODAL -->
+
+<div class="order-box" id="waiterModal">
+
+<div class="order-card">
+
+<h2 id="waiterTitle">
+    Thirr kamarierin
+</h2>
+
+<p id="waiterDescription">
+    Shëno numrin e tavolinës dhe kamarieri do të njoftohet.
+</p>
+
+<input
+id="tableNumber"
+class="table-input"
+type="number"
+placeholder="Numri i tavolinës"
+>
+
+<div class="order-buttons">
+
+<button class="close" onclick="closeWaiter()">
+    Mbyll
+</button>
+
+<button class="send" onclick="sendWaiter()">
+    🔔 Thirr
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-logo">
+    Bon Bouquet
+</div>
+
+<p>
+    Café & Lounge
+</p>
+
+<div class="contact">
+
+📍 Prishtinë<br>
+📞 048 707 708
+
+</div>
+
+<div class="social">
+
+<a href="#" target="_blank">
+    Instagram
+</a>
+
+</div>
+
+<div class="xtech">
+    DIGITAL MENU BY X TECH
+</div>
+
+</footer>
+
+
+<script>
+
+/* CATEGORY */
+
+function filterMenu(category,button){
+
+    const sections =
+        document.querySelectorAll(".menu-section");
+
+    const buttons =
+        document.querySelectorAll(".category-btn");
+
+    buttons.forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    sections.forEach(section=>{
+
+        if(category==="all"){
+            section.classList.remove("hidden");
+        }
+
+        else if(section.dataset.category===category){
+            section.classList.remove("hidden");
+        }
+
+        else{
+            section.classList.add("hidden");
+        }
+
+    });
+
+}
+
+
+/* SEARCH */
+
+function searchMenu(){
+
+    const value =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const sections =
+        document.querySelectorAll(".menu-section");
+
+    sections.forEach(section=>{
+
+        let found=false;
+
+        const items =
+            section.querySelectorAll(".item");
+
+        items.forEach(item=>{
+
+            if(
+                item.innerText
+                .toLowerCase()
+                .includes(value)
+            ){
+
+                item.style.display="";
+                found=true;
+
+            }else{
+
+                item.style.display="none";
+
+            }
+
+        });
+
+        if(found){
+            section.classList.remove("hidden");
+        }else{
+            section.classList.add("hidden");
+        }
+
+    });
+
+}
+
+
+/* WAITER */
+
+function openWaiter(){
+
+    document
+    .getElementById("waiterModal")
+    .classList.add("show");
+
+}
+
+function closeWaiter(){
+
+    document
+    .getElementById("waiterModal")
+    .classList.remove("show");
+
+}
+
+function sendWaiter(){
+
+    const table =
+        document
+        .getElementById("tableNumber")
+        .value;
+
+    if(!table){
+
+        alert("Ju lutem shkruani numrin e tavolinës.");
+
+        return;
+
+    }
+
+    /*
+       KËTU MË VONË MUND TË LIDHET
+       FIREBASE / SUPABASE / API
+       PËR NJOFTIM REAL TË KAMARIERIT.
+    */
+
+    alert(
+        "Kamarieri është njoftuar për tavolinën " + table + "."
+    );
+
+    closeWaiter();
+const WAITER_PHONE = "38348200196"; // 048 707 708 nga footer-i
+
+function sendWaiter(){
+    const table = document.getElementById("tableNumber").value;
+
+    if(!table){
+        alert("Ju lutem shkruani numrin e tavolinës.");
+        return;
+    }
+
+    const text = "🔔 Tavolina " + table + " po të thërret.";
+    const url = "https://wa.me/" + WAITER_PHONE + "?text=" + encodeURIComponent(text);
+
+    window.open(url, "_blank");
+
+    alert("Kamarieri është njoftuar për tavolinën " + table + ".");
+    closeWaiter();
+}
+}
+
+
+/* LANGUAGE */
+
+function setLanguage(lang,button){
+
+    document
+    .querySelectorAll(".language button")
+    .forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    if(lang==="en"){
+
+        document.getElementById("menuTitle").innerText="MENU";
+
+        document.getElementById("waiterText")
+        .innerText="Call waiter";
+
+        document.getElementById("waiterTitle")
+        .innerText="Call waiter";
+
+        document.getElementById("waiterDescription")
+        .innerText=
+        "Enter your table number and the waiter will be notified.";
+
+        document.getElementById("search")
+        .placeholder="Search menu...";
+
+    }else{
+
+        document.getElementById("menuTitle").innerText="MENU";
+
+        document.getElementById("waiterText")
+        .innerText="Thirr kamarierin";
+
+        document.getElementById("waiterTitle")
+        .innerText="Thirr kamarierin";
+
+        document.getElementById("waiterDescription")
+        .innerText=
+        "Shëno numrin e tavolinës dhe kamarieri do të njoftohet.";
+
+        document.getElementById("search")
+        .placeholder="Kërko në menu...";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
